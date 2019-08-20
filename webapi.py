@@ -13,7 +13,6 @@ class WebAPI(threading.Thread):
 
         self.post_url = post_url
         self.jwt = jwt
-        print(f"jwt: {self.jwt}")
         self.chunk_size = chunk_size
         self.max_checkin_attempts = max_checkin_attempts
         self.interval = interval
@@ -58,7 +57,6 @@ class WebAPI(threading.Thread):
 
     def _post(self, url, json_data):
         headers = {'Authorization': f'Bearer {self.jwt}'}
-        print(headers)
         result = requests.post(url, json=json_data, verify=False, headers=headers)
 
         return result

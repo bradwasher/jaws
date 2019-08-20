@@ -43,10 +43,10 @@ def main():
         iface.run()
 
         api = WebAPI(args["collection_point_url"], jwt=args["json_web_token"])
-        chk = api.check_in({"sensor_id":args["sensor_id"], "mode":args["monitor_mode"]})
+        chk = api.check_in({"sensor_id":args["sensor_id"], "mode":args["monitor_mode"], "batch_id":args["batch_id"], "batch_description":args["batch_description"]})
         api.start()
 
-        sense = Sensor(args["sensor_id"], args["monitor_interface"], api, loc)
+        sense = Sensor(args["sensor_id"], args["monitor_interface"], api, loc, batch_id = args["batch_id"], batch_description=args["batch_description"])
         sense.run()
 
     except (KeyboardInterrupt, SystemExit):  # when you press ctrl+c
