@@ -39,7 +39,7 @@ def main():
         loc = Location(args["gps_mode"])
         loc.run()
 
-        iface = MonitorInterface(args["monitor_interface"], args["channel_dwell"])
+        iface = MonitorInterface(args["monitor_interface"], args["channel_mode"], args["channel_lock"], args["channel_dwell"])
         iface.run()
 
         api = WebAPI(args["collection_point_url"])
@@ -72,12 +72,14 @@ def get_args():
     ap.add_argument("-o", "--cool-down", required=False, help="time in seconds between target hit alerts in seconds; defaults to 15")
     ap.add_argument("-a", "--alert-interval", required=False, help="interval in seconds between when records are posted to collection point; defaults to 15")
     ap.add_argument("-i", "--monitor-interface", required=True, help="network interface the sensor is using to collect data" )
-    ap.add_argument("-l", "--channel-lock", required=False, help="channel to lock on to for collection; default or 0 is to hop between 1, 6, and 11 every 1000 ms")
     ap.add_argument("-g", "--gps-mode", required=True, help="if value is 'dynamic' then attempt to get location from gps device; otherwise input static coordinates of sensor (eg '1.234,5.678')")
     ap.add_argument("-b", "--batch-id", required=False, help="an identifier for this batch of collection")
     ap.add_argument("-d", "--batch-description", required=False, help="a description for this batch of collection")
-    ap.add_argument("-w", "--channel-dwell", required=False, help="value in seconds to stay on a channel if in channel hopping mode; default is .5")
     ap.add_argument("-j", "--json-web-token", required=True, help="authorization token used to allow access to web api")
+    ap.add_argument("-l", "--channel-lock", required=False, help="channel to lock on to for collection; default or 0 is to hop between 1, 6, and 11 every 1000 ms")
+    ap.add_argument("-w", "--channel-dwell", required=False, help="value in seconds to stay on a channel if in channel hopping mode; default is .5")
+    ap.add_argument("-z", "--channel-mode", required=False, help="hop or lock")
+
     args = vars(ap.parse_args())
     #print(args)
 
