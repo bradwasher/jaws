@@ -37,7 +37,7 @@ class WebAPI(threading.Thread):
         results = self._post(self.post_url, settings)
         counter = 1
 
-        while results.status_code != 200:
+        while results.status_code != 201:
             if counter == self.max_checkin_attempts:
                 return {'status':'failed'}
             print("Unable to successfully contact collection point - {0} {1}. Trying again....".format(results.status_code, results.text))
