@@ -1,4 +1,6 @@
 import requests
+from urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 import threading
 import json
 import time
@@ -39,7 +41,7 @@ class WebAPI(threading.Thread):
                 return {'status':'failed'}
             print("Unable to successfully contact collection point - {0} {1}. Trying again....".format(results.status_code, results.text))
             time.sleep(5)
-            results = self._post(self.post_url, checkin)
+            results = self._post(self.post_url, settings)
             counter += 1
 
         if "mode" in settings.keys() and settings["mode"] == 'target-list':
@@ -55,6 +57,7 @@ class WebAPI(threading.Thread):
 
     def _post(self, url, json_data):
         headers = {'Authorization': 'Bearer {}'.format(self.jwt)}
+        print(headers)
         result = requests.post(url, json=json_data, verify=False, headers=headers)
 
         return result
