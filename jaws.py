@@ -42,7 +42,7 @@ def main():
         iface = MonitorInterface(args["monitor_interface"], args["channel_mode"], args["channel_lock"], args["channel_dwell"])
         iface.run()
 
-        api = WebAPI(args["collection_point_url"])
+        api = WebAPI(args["collection_point_url"], jwt=args["json_web_token"])
         chk = api.check_in({"sensor_id":args["sensor_id"], "mode":args["monitor_mode"]})
         api.start()
 
