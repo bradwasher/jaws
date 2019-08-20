@@ -121,6 +121,8 @@ def get_args():
                 sys.exit(f"Exiting - Invalid Channel Lock: {args['channel_lock']}")
         except ValueError:
             sys.exit(f"Exiting - Invalid Channel Lock: {args['channel_lock']}")
+    else:
+        args["channel_lock"] = 0
 
 
     # validate the interface is up and in monitor mode
@@ -151,6 +153,8 @@ def get_args():
             args['channel_dwell'] = float(args['channel_dwell'])
         except ValueError:
             sys.exit(f"Exiting - Invalid Channel Hold Value: {args['channel_dwell']}")
+    else:
+        args["channel_dwell"] = 0
 
 
     return args
