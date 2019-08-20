@@ -134,14 +134,14 @@ def get_args():
 
 
     try:
-        if args['gps_coordinates'] != 'dynamic':
-            coords = [float(x) for x in args['gps_coordinates'].split(',')]
+        if args['gps_mode'] != 'dynamic':
+            coords = [float(x) for x in args['gps_mode'].split(',')]
 
             # check if coordinates are in proper range
             if not(-90.0 <= coords[0] <= 90.0 and -180.0 < coords[1] < 180.0):
-                sys.exit(f"Exiting - Invalid GPS Coordinates: {args['gps_coordinates']}")
+                sys.exit(f"Exiting - Invalid GPS Coordinates: {args['gps_mode']}")
     except:
-        sys.exit(f"Exiting - Invalid GPS Coordinates: {args['gps_coordinates']}")
+        sys.exit(f"Exiting - Invalid GPS Coordinates: {args['gps_mode']}")
 
 
     if args['channel_dwell'] is not None:
