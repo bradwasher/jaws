@@ -20,7 +20,7 @@ class ChannelHopper(threading.Thread):
                 channel = 11
             else:
                 channel = 1
-            print(f"channel {channel}")
+            #print(f"channel {channel}")
 
     def stop(self):
         self._running = False
