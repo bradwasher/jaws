@@ -39,7 +39,7 @@ class WebAPI(threading.Thread):
                 return {'status':'failed'}
             print("Unable to successfully contact collection point - {0} {1}. Trying again....".format(results.status_code, results.text))
             time.sleep(5)
-            results = self.post(self.post_url, checkin)
+            results = self._post(self.post_url, checkin)
             counter += 1
 
         if "mode" in settings.keys() and settings["mode"] == 'target-list':
