@@ -59,8 +59,14 @@ class Sensor:
             record = self._create_record(pkt, timestamp)
             record['record_type'] = 'eapol'
             eapol = []
-            for x in pkt.getlayer(Raw):
-                eapol.append(x.load.hex())
+            #error here
+            #     for x in pkt.getlayer(Raw):                                                      %Cpu(s): 20.2 us,  6.2 sy,  0.0 ni, 73.3 id,  0.3 wa,  0.0 hi,  0.1 si,  0.0 st
+            # TypeError: 'NoneType' object is not iterable
+            try:
+                for x in pkt.getlayer(Raw):
+                    eapol.append(x.load.hex())
+            except:
+                pass
             if len(eapol) > 0:
                 record['eapol'] = ''.join(eapol)
 
